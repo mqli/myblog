@@ -28,6 +28,13 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-http.createServer(app).listen(process.env.PORT || 8001);
+//http.createServer(app).listen(process.env.PORT || 8001);
 
+ 
+var server = http.createServer(function (req, res) {
+  res.writeHead(200, { "Content-Type": "text/plain" })
+  res.end("Hello world\n");
+});
+ 
+server.listen(process.env.PORT || 8001);
 console.log("Express server listening for connections");
