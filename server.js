@@ -3,7 +3,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , http = require('http');
 
 var app = module.exports = express();
 
@@ -27,6 +28,6 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.listen(process.env.PORT || 8001);
+app.listen(process.env.PORT || 3000);
 
 console.log("Express server listening for connections");
