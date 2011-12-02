@@ -1,7 +1,32 @@
-h1= title
-p Welcome to #{title}
-ul
-    each post in posts
-        li
-            a(href='/post/' + post._id) post.title
-      
+!!!
+html
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        header.page_header
+            h1 BlueJukebox's Blog
+            nav
+                ul
+                    li: a(href='#') blogs
+                    li: a(href='#') about
+        section.posts
+            article.post
+                hearder
+                    h2 windows下搭建nodejs开发环境
+                    p posted by mqli
+                        i 2011年12月2日13:11:37
+                aside
+                    p 
+                p 
+                footer
+                    p: a(href='#'): i25 comments
+        section.siderbar
+            nav
+                h3 Archives
+                ul
+                    li: a(href="#") Oct
+                    li: a(href="#") Sep
+                    li: a(href="#") Aug
+        footer.page_footer
+            p BlueJukebox
