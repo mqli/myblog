@@ -6,7 +6,7 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-var app = module.exports = express();
+var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
