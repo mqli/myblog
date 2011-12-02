@@ -29,6 +29,6 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-http.createServer(app).listen(3000);
+app.listen(process.env.PORT || 3000);
 
 console.log("Express server listening for connections");
