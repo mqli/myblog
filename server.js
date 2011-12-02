@@ -4,7 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , http = require('http');
 
 var app = module.exports = express();
 
@@ -28,6 +29,11 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.listen(process.env.PORT || 80);
-
+//app.listen(process.env.PORT || 80);
+var server = http.createServer(function (req, res) {
+  res.writeHead(200, { "Content-Type": "text/plain" })
+  res.end("Hello world\n");
+});
+ 
+server.listen(process.env.PORT || 8001);
 console.log("Express server listening for connections");
