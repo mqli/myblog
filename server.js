@@ -6,7 +6,7 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -26,8 +26,13 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-app.get('/', routes.index);
 
+
+app.get('/post/edit', routes.edit);
+app.get('/post', routes.post);
+app.post('/post/insert', routes.insert);
+
+app.get('/', routes.index);
 app.listen(process.env.PORT || 8001);
 
 console.log("Express server listening for connections");
