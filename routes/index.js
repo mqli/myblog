@@ -1,9 +1,9 @@
-var post = require('../model/post')
+//var post = require('../model/post')
 
 exports.index = function(req, res){
-  post.findAll(function (posts) {
-    res.render('index', {posts: posts});
-  });  
+  //post.findAll(function (posts) {
+    res.render('index', {posts: []});
+  //});  
 };
 exports.edit = function (req, res) {
   res.render('edit', {post : null});
