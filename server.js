@@ -29,7 +29,7 @@ app.configure('production', function(){
 
 
 app.get('/post/edit', routes.edit);
-app.get('/post', routes.post);
+app.get('/post/:id', routes.post);
 app.post('/post/insert', routes.insert);
 
 app.get('/', routes.index);
