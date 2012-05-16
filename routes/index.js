@@ -14,8 +14,8 @@ exports.edit = function (req, res) {
 };
 exports.insert = function (req, res) {
   console.log(req.body.post);
-  post.insert(req.body.post, function () {
-    post.findAll(function (posts) {
+  Post.insert(req.body.post, function () {
+    Post.findAll(function (posts) {
       res.render('index', {posts: posts});
     });
   });
