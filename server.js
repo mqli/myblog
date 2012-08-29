@@ -26,8 +26,6 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-
-
 app.get('/post/edit', routes.edit);
 app.get('/post/:id', routes.post);
 app.post('/post/insert', routes.insert);
