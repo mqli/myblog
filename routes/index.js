@@ -20,3 +20,7 @@ exports.insert = function (req, res) {
     });
   });
 };
+
+exports.tools = function (req, res) {
+  res.render('tools');
+}

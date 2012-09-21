@@ -1,0 +1,41 @@
+!!!
+html
+  head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src='/javascript/lib/jquery-1.8.2.js')
+    script(src='/javascript/lib/bootstrap.js')
+    script(src='/javascript/tools.js')
+  body
+    h1 Hospital Pay Tools
+    div.container-fluid
+      div.row-fluid
+        div.span6
+          h3 hospital
+          form.form-horizontal
+            div.control-group
+              label.control-label name:
+              div.controls
+                input.name(type="text", placeholder="hospital name")
+              label.control-label price:
+              div.controls
+                input.price(type="text", placeholder="hospital price")
+          button#addHospital.btn.btn-primary add
+          table#output.table
+            thead
+              tr
+                td name
+                td price
+                td total
+            tbody
+        div.span6
+          h3 student
+          form.form-horizontal
+            div.control-group
+              label.control-label count:
+              div.controls
+                input.name(type="text", placeholder="student count")
+              label.control-label hospital:
+              div.controls
+                select.hospital
+          button#addStudent.btn.btn-primary add
