@@ -1,0 +1,9 @@
+{
+ "name":"my-blog",
+  "version":"0.0.1",
+  "dependencies":{
+      "express":"",
+      "jade": "",
+      "mongodb": ""
+  }
+}
