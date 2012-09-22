@@ -1,0 +1,16 @@
+--- 
+applications: 
+  .: 
+    mem: 128M
+    framework: 
+      name: node
+      info: 
+        mem: 64M
+        description: Node.js Application
+        exec: 
+    name: mqli
+    url: ${name}.${target-base}
+    services: 
+      myblog-db: 
+        type: mongodb
+    instances: 1

@@ -27,17 +27,13 @@ html
               div.controls
                 input.price(type="text", placeholder="hospital price")
           button#addHospital.btn.btn-primary add
-          table#output.table
-            thead
-              tr
-                td name
-                td price
-                td total
-            tbody
         div.span6
           h3 student
           form.form-horizontal
             div.control-group
+              label.control-label class:
+              div.controls
+                input.name(type="text", placeholder="class")
               label.control-label count:
               div.controls
                 input.name(type="text", placeholder="student count")
@@ -45,3 +41,28 @@ html
               div.controls
                 select.hospital
           button#addStudent.btn.btn-primary add
+      div.row-fluid
+         table#output.table
+          thead
+            tr
+              td Hospital
+              td Price
+              td Class
+              td Count
+              td Class Total
+              td Hospital Total
+          tbody
+            tr
+              td Fake Hospital
+              td 100
+              td Class 101
+              td 20
+              td 2000
+              td --
+            tr
+              td --
+              td --
+              td Class 102
+              td 10
+              td 1000
+              td 3000
