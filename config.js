@@ -1,5 +1,6 @@
 module.exports = {
-	SERVER_PORT: process.env.PORT || 8001,
+	SERVER_HOST: process.env.VCAP_APP_HOST || 'localhost',
+	SERVER_PORT: process.env.VCAP_APP_PORT || process.env.PORT || 8001,
 	MONGO_HOST: 'localhost',
 	MONGO_PORT: 27017
 }
