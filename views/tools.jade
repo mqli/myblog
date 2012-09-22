@@ -6,7 +6,14 @@ html
     script(src='/javascript/lib/bootstrap.js')
     script(src='/javascript/tools.js')
   body
-    h1 Hospital Pay Tools
+    div.navbar.navbar-inverse.navbar-static-top
+      div.navbar-inner
+        a.brand(href='/') BlueJukebox's Site
+        ul.nav
+          li: a(href='/') blogs
+          li: a(href='') about
+          //li: a(href='post/edit') new post
+          li.active: a(href='#') tools
     div.container-fluid
       div.row-fluid
         div.span6

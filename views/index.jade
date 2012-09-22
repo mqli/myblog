@@ -1,37 +1,29 @@
 !!!
 html
   head
-    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    //if lt IE 9
-      script(src='/javascript/ie-sucks.js')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src='/javascript/lib/jquery-1.8.2.js')
+    script(src='/javascript/lib/bootstrap.js')
+    style
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
   body
-    header.page_header
-      h1 BlueJukebox's Site
-      nav
-        ul
-          li: a(href='#') blogs
-          li: a(href='#') about
-          //li: a(href='post/edit') new post
-          li: a(href='tools') tools
-    section.posts
-      for post in posts
-        article.post
-        hearder
-          h2
-            a(href='post/' + post._id)=post.title
-          p posted by mqli at
-            i=post.time
-        aside
-          p=post.content
-        footer
-          p: a(href='#'): i 0 comments
-    section.siderbar
-      nav
-        h3 Archives
-        ul
-          li: a(href="#") Oct
-          li: a(href="#") Sep
-          li: a(href="#") Aug
-    footer.page_footer
-      p BlueJukebox
+    div.navbar.navbar-inverse.navbar-fixed-top
+      div.navbar-inner
+        div.container-fluid
+          a.brand(href='#') BlueJukebox's Site
+          ul.nav
+            li.active: a(href='#') blogs
+            li: a(href='#') about
+            //li: a(href='post/edit') new post
+            li: a(href='tools') tools
+    div.container-fluid
+      div.row-fluid
+        div.span3
+          ul.nav.nav-tabs.nav-stacked
+            li: a(href='#') nodejs
+            li: a(href='#') javascript
+            li: a(href='#') css
+ 
