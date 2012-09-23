@@ -4,6 +4,7 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     script(src='/javascript/lib/jquery-1.8.2.js')
     script(src='/javascript/lib/bootstrap.js')
+    script(src='/javascript/lib/jade.js')
     script(src='/javascript/tools.js')
   body
     div.navbar.navbar-inverse.navbar-static-top
@@ -17,34 +18,45 @@ html
     div.container-fluid
       div.row-fluid
         div.span6
-          h3 hospital
-          form.form-horizontal
-            div.control-group
+          div.row-fluid
+            h3 hospital
+          div.row-fluid
+            div.span6
               label.control-label name:
-              div.controls
-                input.name(type="text", placeholder="hospital name")
+              input#hospital_name(type="text", placeholder="hospital name")
               label.control-label price:
-              div.controls
-                input.price(type="text", placeholder="hospital price")
-          button#addHospital.btn.btn-primary add
+              input#hospital_price(type="text", placeholder="hospital price")
+              button#addHospital.btn.btn-primary add
+            div.span6
+              table.table
+                thead#hospitals
+                  tr
+                    td name
+                    td price
         div.span6
-          h3 student
-          form.form-horizontal
-            div.control-group
+          div.row-fluid
+            h3 student
+          div.row-fluid
+            div.span6
               label.control-label class:
-              div.controls
-                input.name(type="text", placeholder="class")
+              input(type="text", placeholder="class")
               label.control-label count:
-              div.controls
-                input.name(type="text", placeholder="student count")
+              input#students_count(type="text", placeholder="student count")
               label.control-label hospital:
-              div.controls
-                select.hospital
-          button#addStudent.btn.btn-primary add
+              select#students_hospital
+              button#addStudent.btn.btn-primary add
+            div.span6
+              table.table
+                thead#students
+                  tr
+                    td class
+                    td count
+                    td hospital
       div.row-fluid
-         table#output.table
+        h3 bill
+        table#output.table
           thead
-            tr
+            tr111
               td Hospital
               td Price
               td Class
@@ -52,17 +64,4 @@ html
               td Class Total
               td Hospital Total
           tbody
-            tr
-              td Fake Hospital
-              td 100
-              td Class 101
-              td 20
-              td 2000
-              td --
-            tr
-              td --
-              td --
-              td Class 102
-              td 10
-              td 1000
-              td 3000
+          

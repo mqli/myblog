@@ -3,10 +3,12 @@ $(function () {
     _hospitals: {},
     add: function (name, price) {
       if (!this._hospitals[name]) {
-        $('select.hospital').append('<option>' + name + '</option>');
+        $('#students_hospital').append('<option>' + name + '</option>');
+        $('#hospitals').append('<tr><td>' + name +'</td><td class="'+name+'">'+price+'</td></tr>')
         Bill.addHospital(name, price);
       }
       this._hospitals[name] = parseInt(price);
+      $('#hospitals .' + name).html(price);
       Bill.updatePrice(name, price);
     },
     getPirce: function (name) {
@@ -20,29 +22,28 @@ $(function () {
   },
   Bill = {
     addHospital: function (name, price) {
-      $('#output tbody').append('<tr id="'+name+'"><td>' + name + '</td><td>' + price + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td>' + 0 + '</td></tr>' );
+      $('#output tbody').append('<tr><td>' + name + '</td><td class="'+name+'">' + price + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td class="'+name+'_total">' + 0 + '</td></tr>' );
     },
     updatePrice: function (name, price) {
-      $('#' + name + ' td:eq(1)').html(price);
+      $('#output .' + name).html(price);
     },
     addStudent: function (className, amount, hospital) {
-      $('#' + hospital + ' td:eq(5)').html(function () {
+      $('#output .' + hospital + '_total').html(function () {
         return parseInt($(this).text()) + (Hospital.getPirce(hospital) * amount);
       });
     }
   };
   
   $('#addHospital').click(function () {
-    var $li = $(this).prev(),
-        name = $li.find('.name').val(),
-        price = $li.find('.price').val();
+    var name = $('#hospital_name').val(),
+        price = $('#hospital_price').val();
     if (name && price) {
       Hospital.add(name, price);
     }
   });
   $('#addStudent').click(function () {
-    var amount = $(this).prev().find('input:eq(1)').val(),
-        hospital = $(this).prev().find('option:selected').text();
+    var amount = $('#students_count').val(),
+        hospital = $('#students_hospital option:selected').text();
     if (amount) {
        Students.add(null,amount, hospital);
     }  
