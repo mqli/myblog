@@ -1,9 +1,7 @@
 !!!
 html
   head
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    script(src='/javascript/lib/jquery-1.8.2.js')
-    script(src='/javascript/lib/bootstrap.js')
+    include head
     style
       body {
         padding-top: 60px;
@@ -12,15 +10,15 @@ html
   body
     div.navbar.navbar-inverse.navbar-fixed-top
       div.navbar-inner
-        div.container-fluid
+        div.container
           a.brand(href='#') BlueJukebox's Site
           ul.nav
             li.active: a(href='#') blogs
             li: a(href='#') about
             //li: a(href='post/edit') new post
             li: a(href='tools') tools
-    div.container-fluid
-      div.row-fluid
+    div.container
+      div.row
         div.span3
           ul.nav.nav-tabs.nav-stacked
             li: a(href='#') nodejs

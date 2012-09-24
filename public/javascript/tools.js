@@ -22,7 +22,7 @@ $(function () {
   },
   Bill = {
     addHospital: function (name, price) {
-      $('#output tbody').append('<tr><td>' + name + '</td><td class="'+name+'">' + price + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td class="'+name+'_total">' + 0 + '</td></tr>' );
+      $('#output tbody').append('<tr><td>' + name + '</td><td class="'+name+'">' + price + '</td><td>' + 0 + '</td><td>' + 0 + '</td><td>0</td><td>' + 0 + '</td><td class="'+name+'_total">' + 0 + '</td></tr>' );
     },
     updatePrice: function (name, price) {
       $('#output .' + name).html(price);
