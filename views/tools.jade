@@ -2,6 +2,7 @@
 html
   head
     include head
+    script(src='/javascript/lib/ember.js')
     script(src='/javascript/tools.js')
   body
     div.navbar.navbar-inverse.navbar-static-top
@@ -25,8 +26,14 @@ html
             label.span2 price:
             input.span3#hospital_price(type="text", placeholder="hospital price")
           div.row
-            div.span5
+            div.span1.offset4
               button#addHospital.btn.btn-primary add
+          div.row
+            div.span5
+              table.table.table-bordered
+                thead#hospitals: tr
+                  td name
+                  td price
         div.span7
           div.row  
             h3.span5 student
@@ -42,21 +49,17 @@ html
           div.row
             label.span2 hospital:
             select.span3#students_hospital
-            div.control-group.span3
+          div.row
+            div.span1.offset4
               button#addStudent.btn.btn-primary add
-      div.row
-        div.span5  
-          table.table.table-bordered
-            thead#hospitals: tr
-              td name
-              td price
-        div.span7
-          table.table.table-bordered
-            thead#students: tr
-              td class
-              td count
-              td time
-              td hospital
+          div.row
+            div.span7
+              table.table.table-bordered
+                thead#students: tr
+                  td class
+                  td count
+                  td time
+                  td hospital
       div.row
         div.span12  
           h3 bill
