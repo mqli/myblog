@@ -2,8 +2,6 @@
 html
   head
     include head
-    script(src='/javascript/lib/underscore.js')
-    script(src='/javascript/lib/backbone.js')
     script(src='/javascript/tools.js')
   body
     div.navbar.navbar-inverse.navbar-static-top
@@ -34,10 +32,13 @@ html
             h3.span5 student
           div.row  
             label.span2 class:
-            input.span3(type="text", placeholder="class")
+            input.span3#class_name(type="text", placeholder="class")
           div.row  
             label.span2 count:
             input.span3#students_count(type="text", placeholder="student count")
+          div.row  
+            label.span2 time:
+            input.span3#time(type="text", placeholder="time")
           div.row
             label.span2 hospital:
             select.span3#students_hospital
@@ -54,7 +55,7 @@ html
             thead#students: tr
               td class
               td count
-              td week
+              td time
               td hospital
       div.row
         div.span12  
@@ -62,7 +63,6 @@ html
           table#output.table.table-bordered
             thead: tr
               td Hospital
-              td Price
               td Class
               td Count
               td Week
