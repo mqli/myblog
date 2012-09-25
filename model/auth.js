@@ -1,12 +1,12 @@
 var users = {
-	'mqli' :'aaaaaa' 
+	'mqli' :'123456' 
 }
 exports.checkAuth = function (resource, username) {
-	if (resource != '/tools') {
+	if (resource && resource.indexOf('tools') < 0) {
 		return true;
 	}
 	return !!username;
 };
-exports.login = function (username, password) {
+exports.checkPassword = function (username, password) {
 	return users[username] == password;
 }

@@ -3,12 +3,17 @@ div.navbar.navbar-inverse.navbar-fixed-top
     div.container
       a.brand(href='/') BlueJukebox's Site
       ul.nav
-        li.active: a(href='/') blogs
+        li: a(href='/')
+          i.icon-home.icon-white
+          |home
         li: a(href='#') about
-        li: a(href='tools') tools
+        li: a(href='/tools') tools
+        li: a(href='/tools/hospitals') hospitals
       ul.nav.pull-right
         - if (username)
-          li.active: a=username
+          li.active: a
+            i.icon-user
+            =username
           li: a(href="logout") logout
         - else
           li: a#login(href="#") login

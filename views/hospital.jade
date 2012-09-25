@@ -1,0 +1,22 @@
+include includes/head
+div.container
+  div.row
+    div.span3
+      form(action="/tools/hospitals/save",method="post")
+        label name:
+        input(name="name", type="text", placeholder="hospital name")
+        label price:
+        input(name="price",type="text", placeholder="hospital price")
+        button.btn.btn-primary.offset2 add
+    div.span5.offset2
+      table.table.table-bordered
+        thead: tr
+          td name
+          td price
+          td delete
+        tbody
+        for hospital in hospitals
+          tr
+            td=hospital.name
+            td=hospital.price
+            td: a(href="/tools/hospitals/remove/#{hospital._id}") delete

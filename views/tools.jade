@@ -1,75 +1,62 @@
-!!!
-html
-  head
-    include includes/head
-    script(src='/javascript/lib/ember.js')
-    script(src='/javascript/tools.js')
-  body
-    div.navbar.navbar-inverse.navbar-fixed-top
-      div.navbar-inner
-        div.container
-          a.brand(href='/') BlueJukebox's Site
-          ul.nav
-            li: a(href='/') blogs
-            li: a(href='') about
-            //li: a(href='post/edit') new post
-            li.active: a(href='#') tools
-    div.container
-      div.row 
-        div.span5
-          div.row  
-            h3.span5 hospital
-          div.row  
-            label.span2(for="hospital_name") name:
-            input.span3#hospital_name(type="text", placeholder="hospital name")
-          div.row
-            label.span2 price:
-            input.span3#hospital_price(type="text", placeholder="hospital price")
-          div.row
-            div.span1.offset4
-              button#addHospital.btn.btn-primary add
-          div.row
-            div.span5
-              table.table.table-bordered
-                thead#hospitals: tr
-                  td name
-                  td price
-        div.span7
-          div.row  
-            h3.span5 student
-          div.row  
-            label.span2 class:
-            input.span3#class_name(type="text", placeholder="class")
-          div.row  
-            label.span2 count:
-            input.span3#students_count(type="text", placeholder="student count")
-          div.row  
-            label.span2 time:
-            input.span3#time(type="text", placeholder="time")
-          div.row
-            label.span2 hospital:
-            select.span3#students_hospital
-          div.row
-            div.span1.offset4
-              button#addStudent.btn.btn-primary add
-          div.row
-            div.span7
-              table.table.table-bordered
-                thead#students: tr
-                  td class
-                  td count
-                  td time
-                  td hospital
+include includes/head
+  script(src='/javascript/lib/ember.js')
+  script(src='/javascript/tools.js')
+div.container
+  div.row 
+    div.span5
+      div.row  
+        h3.span5 hospital
+      div.row  
+        label.span2(for="hospital_name") name:
+        input.span3#hospital_name(type="text", placeholder="hospital name")
       div.row
-        div.span12  
-          h3 bill
-          table#output.table.table-bordered
-            thead: tr
-              td Hospital
-              td Class
-              td Count
-              td Week
-              td Class Total
-              td Hospital Total
-            tbody
+        label.span2 price:
+        input.span3#hospital_price(type="text", placeholder="hospital price")
+      div.row
+        div.span1.offset4
+          button#addHospital.btn.btn-primary add
+      div.row
+        div.span5
+          table.table.table-bordered
+            thead#hospitals: tr
+              td name
+              td price
+    div.span7
+      div.row  
+        h3.span5 student
+      div.row  
+        label.span2 class:
+        input.span3#class_name(type="text", placeholder="class")
+      div.row  
+        label.span2 count:
+        input.span3#students_count(type="text", placeholder="student count")
+      div.row  
+        label.span2 time:
+        input.span3#time(type="text", placeholder="time")
+      div.row
+        label.span2 hospital:
+        select.span3#students_hospital
+      div.row
+        div.span1.offset4
+          button#addStudent.btn.btn-primary add
+      div.row
+        div.span7
+          table.table.table-bordered
+            thead#students: tr
+              td class
+              td count
+              td time
+              td hospital
+  div.row
+    div.span12  
+      h3 bill
+      table#output.table.table-bordered
+        thead: tr
+          td Hospital
+          td Class
+          td Count
+          td Week
+          td Class Total
+          td Hospital Total
+        tbody
           
