@@ -14,6 +14,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser('bla bla'));
+  app.use(express.session()); 
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -26,11 +28,17 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+app.all('*', routes.auth);
+
 app.get('/post/edit', routes.edit);
 app.get('/post/:id', routes.post);
 app.post('/post/insert', routes.insert);
 
 app.get('/tools', routes.tools);
+
+app.post('/login', routes.login);
+app.get('/logout', routes.logout);
+
 app.get('/', routes.index);
 app.listen(config.SERVER_PORT);
 

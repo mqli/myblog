@@ -1,22 +1,9 @@
 !!!
 html
   head
-    include head
-    style
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
+    include includes/head
   body
-    div.navbar.navbar-inverse.navbar-fixed-top
-      div.navbar-inner
-        div.container
-          a.brand(href='#') BlueJukebox's Site
-          ul.nav
-            li.active: a(href='#') blogs
-            li: a(href='#') about
-            //li: a(href='post/edit') new post
-            li: a(href='tools') tools
+    include includes/navbar
     div.container
       div.row
         div.span3
