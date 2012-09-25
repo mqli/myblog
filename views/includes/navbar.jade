@@ -14,7 +14,7 @@ div.navbar.navbar-inverse.navbar-fixed-top
           li.active: a
             i.icon-user
             =username
-          li: a(href="logout") logout
+          li: a(href="/logout") logout
         - else
           li: a#login(href="#") login
           form.login-form.navbar-form.pull-right(action="/login", method="post")
