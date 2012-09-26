@@ -19,6 +19,22 @@ include includes/head
       td=time
       td=hospital
       td: a(href="/tools/students/remove/\#{_id}") delete
+  script#bills_template(type="template/jade").
+    for bill in bills
+      h5 Hospital: \#{bill.name}
+      h5 Price: \#{bill.price}
+      h5 Totlal: \#{bill.total}
+      table.table.table-bordered.table-hover
+        thead: tr
+            td.span2 class
+            td.span2 time
+            td.span2 class total
+        tbody
+        for student in bill.students
+          tr
+            td=student.className
+            td=student.time
+            td=student.total
 div.container
   div.row
     div.span12: h2 hospitals
@@ -74,7 +90,8 @@ div.container
         button.btn.btn-primary.offset3 add
   div.row
     div.span12: h2 bills
-    div.span10
+      button#getbill getbill
+    div#bills.span10
       for bill in bills
         h5 Hospital: #{bill.name}
         h5 Price: #{bill.price}

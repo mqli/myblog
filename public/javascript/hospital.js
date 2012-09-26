@@ -2,7 +2,13 @@ $(function  () {
   var hospital_template = jade.compile($('#hospital_template').html()),
       alert_template = jade.compile($('#alert_template').html()),
       hospital_option = jade.compile($('#hospital_option').html()),
-      student_template = jade.compile($('#student_template').html());
+      student_template = jade.compile($('#student_template').html()),
+      bills_template = jade.compile($('#bills_template').html()),
+      getBill = function () {
+      	$.get('/tools/bills', function (result) {
+          $('#bills').html(bills_template(result));
+        });
+      };
   //add hospital
   $('#hospital_form').submit(function (event) {
     var $form = $(this);
@@ -18,6 +24,7 @@ $(function  () {
       }
       $('select[name="hospital"]').append(hospital_option(result.hospital));
       $('#hospital_table').append(hospital_template(result.hospital));
+      getBill();
     });
   });
   //remove hospital
@@ -47,6 +54,7 @@ $(function  () {
       	return $form.prepend(alert_template(result.student));
       }
       $('#student_table').append(student_template(result.student));
+      getBill();
     });
   });
   //remove student
@@ -55,6 +63,7 @@ $(function  () {
     event.preventDefault();
     $.get($a.attr('href'), function (hospital) {
       $a.parents('tr').remove();
+      getBill();
     });
   });
 });

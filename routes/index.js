@@ -46,7 +46,7 @@ exports.logout = function (req, res) {
 };
 
 exports.hospitals = function (req, res) {
-  var bills = []
+  var bills = [];
   Hospital.find(function (err, hospitals) {
     Student.find(function (err, students) {
       hospitals.forEach(function (hospital) {
@@ -134,3 +134,29 @@ exports.studentRemove = function (req, res) {
     res.json(student);
   });
 };
+
+exports.bills = function (req, res) {
+  var bills = [];
+  Hospital.find(function (err, hospitals) {
+    Student.find(function (err, students) {
+      hospitals.forEach(function (hospital) {
+        hospital = hospital.toObject();
+        hospital.students = [];
+        hospital.total = 0;
+        students.forEach(function (student) {
+          if (student.hospital == hospital.name) {
+             student = student.toObject()
+             student.total = student.time * student.amount * hospital.price;
+             hospital.students.push(student);
+             hospital.total += student.total;
+          }
+        });
+        bills.push(hospital);
+      });
+      res.json({
+        success: true,
+        bills: bills
+      });
+    });
+  });
+}
