@@ -1,6 +1,7 @@
 var Post = require('../model/post'),
     Auth = require('../model/auth');
-    Hospital = require('../model/hospital');
+    Hospital = require('../model/hospital'),
+    Student = require('../model/student');
 exports.index = function(req, res){
   Post.find({}, function (posts) {
     res.render('index', {posts: posts, username: req.session.username});
@@ -48,15 +49,23 @@ exports.hospitals = function (req, res) {
   });
 };
 exports.hospitalSave = function (req, res) {
-  new Hospital({
-    name: req.body.name,
-    price: req.body.price
-  }).save(function (err) {
-    res.redirect('/tools/hospitals');
+  Hospital.findOne({name: req.body.name}, function (err, hospital) {
+    if (hospital) {
+      return res.json({hospital:hospital});
+    }
+    new Hospital({
+      name: req.body.name,
+      price: req.body.price
+    }).save(function (err, hospital) {
+      res.json({
+        success: true,
+        hospital: hospital
+      });
+    });
   });
 };
 exports.hospitalRemove = function (req, res) {
-  Hospital.findByIdAndRemove(req.params.id, function (err) {
-    res.redirect('/tools/hospitals');
+  Hospital.findByIdAndRemove(req.params.id, function (err, hospital) {
+    res.json(hospital);
   });
 };

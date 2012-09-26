@@ -1,22 +1,59 @@
 include includes/head
+  script(src='/javascript/lib/jade.js')
+  script(src='/javascript/hospital.js')
+  script#hospital_template(type="template/jade").
+    tr
+      td=name
+      td=price
+      td: a(href="/tools/hospitals/remove/\#{_id}") delete
+  script#hospital_option(type="template/jade").
+    option(value="\#{name}")=name
+  script#alert_template(type="template/jade").
+    div.alert
+        button.close(data-dismiss="alert") ×
+        |Duplicate Name \#{name}
 div.container
   div.row
-    div.span3
-      form(action="/tools/hospitals/save",method="post")
-        label name:
-        input(name="name", type="text", placeholder="hospital name")
-        label price:
-        input(name="price",type="text", placeholder="hospital price")
-        button.btn.btn-primary.offset2 add
-    div.span5.offset2
-      table.table.table-bordered
+    div.span12: h3 hospitals
+    div.span5
+      table.table.table-bordered.table-hover
         thead: tr
           td name
           td price
           td delete
-        tbody
+        tbody#hospital_table
         for hospital in hospitals
           tr
             td=hospital.name
             td=hospital.price
             td: a(href="/tools/hospitals/remove/#{hospital._id}") delete
+    div.span4.offset2
+      form#hospital_form(action="/tools/hospitals/save",method="post")
+        label name:
+        input(name="name", type="text", required="", placeholder="hospital name")
+        label price:
+        input(name="price",type="number", required="", placeholder="hospital price")
+        button.btn.btn-primary.offset3 add
+  div.row
+    div.span12: h3 students
+    div.span6
+      table.table.table-bordered.table-hover
+        thead: tr
+          td class
+          td amount
+          td time
+          td hospital
+        tbody#class_table
+    div.span4.offset1
+      form#students_form(action="/tools/students/save",method="post")
+        label class:
+        input(name="className", type="text", required="", placeholder="hospital name")
+        label amount:
+        input(name="amount",type="number", required="", placeholder="hospital price")
+        label time:
+        input(name="time",type="number", required="", placeholder="hospital price")
+        label hospital:
+        select(name="hospital",type="text", required="")
+          for hospital in hospitals
+            option(value="#{hospital.name}")=hospital.name
+        button.btn.btn-primary.offset3 add
