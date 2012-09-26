@@ -41,6 +41,8 @@ app.post('/tools/hospitals/save', routes.hospitalSave);
 app.get('/tools/hospitals/remove/:id', routes.hospitalRemove)
 app.get('/tools', routes.tools);
 
+app.post('/tools/students/save', routes.studentSave);
+app.get('/tools/students/remove/:id', routes.studentRemove)
 
 app.post('/login', routes.login);
 app.get('/logout', routes.logout);
