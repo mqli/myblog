@@ -5,7 +5,7 @@ include includes/head
     tr
       td=name
       td=price
-      td: a(href="/tools/hospitals/remove/\#{_id}") delete
+      td: a(href="/tools/hospital/remove/\#{_id}") delete
   script#hospital_option(type="template/jade").
     option(value="\#{name}")=name
   script#alert_template(type="template/jade").
@@ -18,7 +18,7 @@ include includes/head
       td=amount
       td=time
       td=hospital
-      td: a(href="/tools/students/remove/\#{_id}") delete
+      td: a(href="/tools/student/remove/\#{_id}") delete
   script#bills_template(type="template/jade").
     for bill in bills
       h5 Hospital: \#{bill.name}
@@ -49,9 +49,9 @@ div.container
           tr
             td=hospital.name
             td=hospital.price
-            td: a(href="/tools/hospitals/remove/#{hospital._id}") delete
+            td: a(href="/tools/hospital/remove/#{hospital._id}") delete
     div.span4.offset2
-      form#hospital_form(action="/tools/hospitals/save",method="post")
+      form#hospital_form(action="/tools/hospital/save",method="post")
         label name:
         input(name="name", type="text", required="", placeholder="hospital name")
         label price:
@@ -74,9 +74,9 @@ div.container
               td=student.amount
               td=student.time
               td=student.hospital
-              td: a(href="/tools/students/remove/#{student._id}") delete
+              td: a(href="/tools/student/remove/#{student._id}") delete
     div.span4.offset1
-      form#student_form(action="/tools/students/save",method="post")
+      form#student_form(action="/tools/student/save",method="post")
         label class:
         input(name="className", type="text", required="", placeholder="hospital name")
         label amount:

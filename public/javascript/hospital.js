@@ -5,7 +5,7 @@ $(function  () {
       student_template = jade.compile($('#student_template').html()),
       bills_template = jade.compile($('#bills_template').html()),
       getBill = function () {
-      	$.get('/tools/bills', function (result) {
+      	$.get('/tools/bill.ajax', function (result) {
           $('#bills').html(bills_template(result));
         });
       };
@@ -28,7 +28,7 @@ $(function  () {
     });
   });
   //remove hospital
-  $(document).on('click','a[href^="/tools/hospitals/remove/"]', function (event) {
+  $(document).on('click','a[href^="/tools/hospital/remove/"]', function (event) {
     var $a = $(this);
     $('#hospital_table').parent().parent().find('div.alert').remove();
     event.preventDefault();
@@ -40,6 +40,7 @@ $(function  () {
       }
       $a.parents('tr').remove();
       $('select[name="hospital"] option[value="' + result.hospital.name + '"]').remove();
+      getBill();
     });
   });
 
@@ -58,7 +59,7 @@ $(function  () {
     });
   });
   //remove student
-  $(document).on('click', 'a[href^="/tools/students/remove/"]', function (event) {
+  $(document).on('click', 'a[href^="/tools/student/remove/"]', function (event) {
     var $a = $(this);
     event.preventDefault();
     $.get($a.attr('href'), function (hospital) {

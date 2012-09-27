@@ -3,10 +3,11 @@
  */
 
 var express = require('express'),
-    routes = require('./routes'),
     config = require('./config'),
     mongoose = require('mongoose'),
-    app = module.exports = express();
+    fs = require('fs'),
+    app = module.exports = express(),
+    Auth = require('./model/auth');;
 
 mongoose.connect(config.MONGO_HOST, config.MONGO_DB, config.MONGO_PORT);
 
@@ -30,26 +31,21 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-app.use(routes.auth);
+app.all('*', function (req, res, next) {
+    if (req.ip == '127.0.0.1') {
+      //return next();
+    }
+    if (Auth.checkAuth(req.path, req.session.username)) {
+      return next();
+    }
+    res.redirect('/');
+});
 
-app.get('/post/edit', routes.edit);
-app.get('/post/:id', routes.post);
-app.post('/post/insert', routes.insert);
+fs.readdirSync(__dirname + '/routes').forEach(function (name) {
+  if (name.indexOf('.js') == name.length - 3)
+    require(__dirname + '/routes/' + name)(app);
+});
 
-app.get('/tools/hospitals', routes.hospitals);
-app.post('/tools/hospitals/save', routes.hospitalSave);
-app.get('/tools/hospitals/remove/:id', routes.hospitalRemove)
-app.get('/tools', routes.tools);
-
-app.post('/tools/students/save', routes.studentSave);
-app.get('/tools/students/remove/:id', routes.studentRemove);
-
-app.get('/tools/bills', routes.bills);
-
-app.post('/login', routes.login);
-app.get('/logout', routes.logout);
-
-app.get('/', routes.index);
 app.listen(config.SERVER_PORT);
 
 console.log("Express server listening for connections");
