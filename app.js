@@ -33,7 +33,7 @@ app.configure('production', function(){
 
 app.all('*', function (req, res, next) {
     if (req.ip == '127.0.0.1') {
-      //return next();
+      return next();
     }
     if (Auth.checkAuth(req.path, req.session.username)) {
       return next();
