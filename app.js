@@ -30,7 +30,7 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-app.all('*', routes.auth);
+app.use(routes.auth);
 
 app.get('/post/edit', routes.edit);
 app.get('/post/:id', routes.post);
