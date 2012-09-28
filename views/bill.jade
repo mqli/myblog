@@ -1,108 +1,76 @@
 include includes/head
   script(src='/javascript/lib/jade.js')
-  script(src='/javascript/hospital.js')
-  script#hospital_template(type="template/jade").
-    tr
-      td=name
-      td=price
-      td: a(href="/tools/hospital/remove/\#{_id}") delete
+  script(src='/javascript/bill.js')
   script#hospital_option(type="template/jade").
-    option(value="\#{name}")=name
+    option(value="\#{_id}")=name
   script#alert_template(type="template/jade").
     div.alert
       button.close(data-dismiss="alert") ×
       |\#{message}
-  script#student_template(type="template/jade").
-    tr
-      td=className
-      td=amount
-      td=time
-      td=hospital
-      td: a(href="/tools/student/remove/\#{_id}") delete
-  script#bills_template(type="template/jade").
-    for bill in bills
-      h5 Hospital: \#{bill.name}
-      h5 Price: \#{bill.price}
-      h5 Totlal: \#{bill.total}
+  script#bill_template(type="template/jade").
+    div(id="\#{_id}")
+      h5 name: \#{name}
+      h5 price: \#{price}
       table.table.table-bordered.table-hover
         thead: tr
-            td.span2 class
-            td.span2 time
-            td.span2 class total
+          th class
+          th amount
+          th time
+          th: a(href="/tools/bill/remove/\#{_id}")  delete
         tbody
-        for student in bill.students
+        - var total = 0
+        for student, i in students
+          - total += total + student.time * student.amount * price
           tr
-            td=student.className
+            td=student.name
+            td=student.amount
             td=student.time
-            td=student.total
+            td: a(href="/tools/bill/\#{_id}/student/remove/\#{student._id}") delete
+        tr
+          td total
+          td(colspan="5") \#{total}
 div.container
   div.row
-    div.span12: h2 hospitals
-    div.span5
-      table.table.table-bordered.table-hover
-        thead: tr
-          td name
-          td price
-          td delete
-        tbody#hospital_table
-        for hospital in hospitals
-          tr
-            td=hospital.name
-            td=hospital.price
-            td: a(href="/tools/hospital/remove/#{hospital._id}") delete
-    div.span4.offset2
-      form#hospital_form(action="/tools/hospital/save",method="post")
-        label name:
-        input(name="name", type="text", required="", placeholder="hospital name")
-        label price:
-        input(name="price",type="number", required="", placeholder="hospital price")
-        button.btn.btn-primary.offset3 add
-  div.row
-    div.span12: h2 students
-    div.span6
-      table.table.table-bordered.table-hover
-        thead: tr
-          td class
-          td amount
-          td time
-          td hospital
-          td delete
-        tbody#student_table
-          for student in students
-            tr
-              td=student.className
-              td=student.amount
-              td=student.time
-              td=student.hospital
-              td: a(href="/tools/student/remove/#{student._id}") delete
-    div.span4.offset1
-      form#student_form(action="/tools/student/save",method="post")
-        label class:
-        input(name="className", type="text", required="", placeholder="hospital name")
-        label amount:
-        input(name="amount",type="number", required="", placeholder="hospital price")
-        label time:
-        input(name="time",type="number", required="", placeholder="hospital price")
-        label hospital:
-        select(name="hospital",type="text", required="")
-          for hospital in hospitals
-            option(value="#{hospital.name}")=hospital.name
-        button.btn.btn-primary.offset3 add
-  div.row
-    div.span12: h2 bills
-    div#bills.span10
+    div#bills.span8
       for bill in bills
-        h5 Hospital: #{bill.name}
-        h5 Price: #{bill.price}
-        h5 Totlal: #{bill.total}
-        table.table.table-bordered.table-hover
-          thead: tr
-              td.span2 class
-              td.span2 time
-              td.span2 class total
-          tbody
-          for student in bill.students
-            tr
-              td=student.className
-              td=student.time
-              td=student.total
+        div(id="#{bill._id}")
+          h5 name: #{bill.name}
+          h5 price: #{bill.price}
+          table.table.table-bordered.table-hover
+            thead: tr
+              th class
+              th amount
+              th time
+              th
+                a(href="/tools/bill/remove/#{bill._id}") delete
+            tbody
+              - var total = 0
+              for student, i in bill.students
+                - total += total + student.time * student.amount * bill.price
+                tr
+                  td=student.name
+                  td=student.amount
+                  td=student.time
+                  td: a(href="/tools/bill/#{bill._id}/student/remove/#{student._id}") delete
+              tr
+                td total
+                td(colspan="3") #{total}
+    div#forms.span4.offset8(data-spy="affix")
+      form#hospital_form(action="/tools/bill/add",method="post")
+        label name:
+        input(name="bill[name]", type="text", required="", placeholder="hospital name")
+        label price:
+        input(name="bill[price]",type="number", required="", placeholder="hospital price")
+        button.btn.btn-primary.offset3 add
+      form#student_form(action="/tools/bill/student/add",method="post")
+        label class:
+        input(name="student[name]", type="text", required="", placeholder="hospital name")
+        label amount:
+        input(name="student[amount]",type="number", required="", placeholder="hospital price")
+        label time:
+        input(name="student[time]",type="number", required="", placeholder="hospital price")
+        label hospital:
+        select(name="billId",type="text", required="")
+          for bill in bills
+            option(value="#{bill._id}")=bill.name
+        button.btn.btn-primary.offset3 add
