@@ -14,8 +14,4 @@ div.navbar.navbar-inverse.navbar-fixed-top
             =username
           li: a(href="/logout") logout
         - else
-          li: a#login(href="#") login
-          form.login-form.navbar-form.pull-right(action="/login", method="post")
-            input.span2(name="username", placeholder="username", type="text")
-            input.span2(name="password", placeholder="password", type="password")
-            button.btn.btn-primary(type="submit") login
+          li: a#login(href="/login") login
