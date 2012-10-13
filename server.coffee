@@ -2,10 +2,11 @@ express = require 'express'
 config = require './config' 
 mongoose = require 'mongoose' 
 fs = require 'fs' 
-app = express()
 Auth = require './model/auth'
 
 mongoose.connect config.MONGO_HOST, config.MONGO_DB, config.MONGO_PORT
+
+app = express()
 
 app.configure ->
   app.set 'views', __dirname + '/views'
@@ -15,12 +16,14 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser 'bla bla'
   app.use express.session()
-  app.use app.router
-  app.use express.static __dirname + '/public'
+  app.use(express.static(__dirname + '/public'));
   app.use (req, res, next) ->
+    console.log(req.path)
     if req.ip is '127.0.0.1' or Auth.checkAuth req.path, req.session.username
       return next()
     res.redirect '/'
+  app.use(app.router);
+  
 
 app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true

@@ -25,8 +25,18 @@ html
         padding-right: 5px;
         display: inline-block
       }
+    title
   body
-    include navbar
+    div.navbar.navbar-inverse.navbar-fixed-top
+      div.navbar-inner
+        div.container
+          a.brand(href='/') mqli's site
+          ul.nav
+            li: a(href='/')
+              i.icon-home.icon-white
+              |home
+            li: a(href='/posts') posts
+            li: a(href='/admin/post/new') new post
     div#main.container
       div.row
         div.span9
