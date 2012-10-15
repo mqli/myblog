@@ -2,10 +2,11 @@ express = require 'express'
 config = require './config.coffee' 
 mongoose = require 'mongoose' 
 fs = require 'fs' 
-app = express()
 Auth = require './model/auth'
 
 mongoose.connect config.MONGO_HOST, config.MONGO_DB, config.MONGO_PORT
+
+app = express()
 
 app.configure ->
   app.set 'views', __dirname + '/views'
@@ -22,6 +23,7 @@ app.configure ->
         return next()
     res.redirect '/'
   app.use app.router
+  
 
 app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true

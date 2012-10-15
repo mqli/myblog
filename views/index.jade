@@ -11,3 +11,12 @@ include includes/layout
         =post.createTime.getDate()
     div 
       |!{post.content}
+    h2: a(href="/posts/#{post._id}")=post.title
+    p
+      span.tags
+        for tag in post.tags
+          a(href="/tag/#{tag}"): span.label.label-info=tag
+        i.icon-calendar
+        =post.createTime
+    p
+      =post.content
