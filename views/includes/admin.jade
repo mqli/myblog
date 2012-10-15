@@ -36,27 +36,15 @@ html
             li: a(href='#') about
     div#main.container
       div.row
-        div.span9
+        div.span2
+          ul.well.nav.nav-list
+            li.nav-header Posts 
+            li: a(href="/admin/posts") all post
+            li: a(href="/admin/post/new") new
+            li: a(href="#") category
+            li: a(href="#") tag
+            li.nav-header Links
+            li: a(href="#") all links
+            li: a(href="#") new
+        div.span10
           yield
-        div.span3
-          div.thumbnail
-            img(src="/img/icon.jpg")
-            div.caption
-              h3 mqli
-              p programmer
-          hr
-          h3 tags
-          p.tags
-            for tag in ['javascript', 'programming' ,'nodejs', 'lisp']
-              a(href="#")
-                span.label.label-info
-                  i.icon-tag.icon-white()
-                  =tag
-          hr 
-          h3 links
-          ul
-            li: a(href="http://dailyjs.com/") dailyjs.com
-            li: a(href="http://nodejs.org/") nodejs.org
-      footer
-        p
-          | All Rights Resevred.

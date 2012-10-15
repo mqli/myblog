@@ -1,0 +1,12 @@
+include includes/layout
+  h2: a(href="post/#{post._id}") #{post.title}
+  p
+    span.tags
+      for tag in post.tags
+        a(href="#"): span.label.label-info #{tag}
+      i.icon-calendar
+      =post.createTime.getFullYear()+'-'
+      =post.createTime.getMonth()+1+'-'
+      =post.createTime.getDate()
+  div 
+    |!{post.content}

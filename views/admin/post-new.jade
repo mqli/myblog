@@ -1,0 +1,11 @@
+include ../includes/admin
+  div.row
+    div.span9
+      form(action='/admin/post/new', method='post')
+        label title
+        input.span10(name='post[title]',type='text')
+        label tags
+        input.span10(name='post[tags]',type='text')
+        label content
+        textarea.span10(name='post[content]',rows=20)
+        button.btn.btn-primary(type='submit') save

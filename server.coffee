@@ -1,5 +1,5 @@
 express = require 'express' 
-config = require './config' 
+config = require './config.coffee' 
 mongoose = require 'mongoose' 
 fs = require 'fs' 
 app = express()
@@ -15,12 +15,13 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser 'bla bla'
   app.use express.session()
-  app.use app.router
   app.use express.static __dirname + '/public'
   app.use (req, res, next) ->
-    if req.ip is '127.0.0.1' or Auth.checkAuth req.path, req.session.username
-      return next()
+    if req.session.username or req.path.indexOf('/admin') < 0 or
+      req.ip is '127.0.0.1'
+        return next()
     res.redirect '/'
+  app.use app.router
 
 app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true

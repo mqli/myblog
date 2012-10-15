@@ -1,0 +1,21 @@
+include ../includes/admin
+  table.table.table-striped
+    thead: tr
+      th title
+      th tags
+      th time
+      th edit
+      th delete
+    tbody
+      for post in posts
+        tr
+          td=post.title
+          td=post.tags
+          td
+            =post.createTime.getFullYear()+'-'
+            =post.createTime.getMonth()+1+'-'
+            =post.createTime.getDate()
+          td
+            i.icon-edit()a(href='/admin/post/edit/#{post._id}') edit
+          td
+            i.icon-trash()a(href='/admin/post/remove/#{post._id}') delete
