@@ -21,5 +21,7 @@ module.exports = (app) ->
     res.render 'admin/post-new'
 
   app.post '/admin/post/new', (req, res) ->
-    new Post(req.body.post).save (err, post) ->
+    post = new Post(req.body.post)
+    post.tags = req.body.post.tags.split ','
+    post.save (err, post) ->
       res.redirect '/admin/posts'

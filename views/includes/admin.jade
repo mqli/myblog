@@ -8,6 +8,7 @@ html
     script(src='/javascript/lib/jquery-1.8.2.js')
     script(src='/javascript/lib/bootstrap.js')
     script(src='/javascript/navbar.js')
+    block scripts
     style
       body {
         padding-top: 60px;
@@ -24,6 +25,7 @@ html
         padding-right: 5px;
         display: inline-block
       }
+    block styles
   body
     div.navbar.navbar-inverse.navbar-fixed-top
       div.navbar-inner
@@ -47,4 +49,4 @@ html
             li: a(href="#") all links
             li: a(href="#") new
         div.span10
-          yield
+          block content

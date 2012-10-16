@@ -1,11 +1,13 @@
-include ../includes/admin
+extends ../includes/admin
+block content
   div.row
     div.span9
       form(action='/admin/post/edit/#{post._id}', method='post')
         label title
         input.span10(name='post[title]',type='text',value='#{post.title}')
         label tags
-        input.span10(name='post[tags]',type='text', value="#{post.tags}")
+        input(name='post[tags]',type='text', value="#{post.tags}")
+        button.btn.btn-link add
         label content
         textarea.span10(name='post[content]',rows=20)
           =post.content

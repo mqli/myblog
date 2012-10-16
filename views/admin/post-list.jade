@@ -1,4 +1,5 @@
-include ../includes/admin
+extends ../includes/admin
+block content
   table.table.table-striped
     thead: tr
       th title
@@ -7,6 +8,8 @@ include ../includes/admin
       th edit
       th delete
     tbody
+      if posts.length == 0
+        p no result
       for post in posts
         tr
           td=post.title
