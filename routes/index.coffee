@@ -11,13 +11,13 @@ relyingParty = new openid.RelyingParty config.OPENID_CALLBACK,
   ]
 module.exports = (app) ->
   app.get '/login', (req, res) ->
+    console.log(config)
     relyingParty.authenticate config.OPENID_URL, false, (error, authUrl) ->
       console.log(error) if error
       res.redirect authUrl
 
   app.get '/verify', (req, res) ->
     relyingParty.verifyAssertion req, (error, result) ->
-      console.log(error) if error
       console.log(result)
       if !error and result.authenticated and result.email of config.AUTHORS
         req.session.username = config.AUTHORS[result.email]
