@@ -4,6 +4,8 @@
   "dependencies":{
       "express":"",
       "jade": "",
-      "mongodb": ""
+      "mongodb": "",
+      "openid": "",
+      "coffee-script": ""
   }
 }
