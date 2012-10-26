@@ -2,7 +2,6 @@ express = require 'express'
 config = require './config.coffee' 
 mongoose = require 'mongoose' 
 fs = require 'fs' 
-Auth = require './model/auth'
 
 mongoose.connect config.MONGO_HOST, config.MONGO_DB, config.MONGO_PORT
 
