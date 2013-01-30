@@ -1,6 +1,6 @@
 mongoose = require 'mongoose'
 
-schema = new mongoose.Schema
+Post = new mongoose.Schema
   title: String
   tags: [String]
   isDraft: 
@@ -13,11 +13,11 @@ schema = new mongoose.Schema
     type: Date
     default: Date.now
   content: String
-schema.statics.getTags = (cb) ->
+Post.statics.getTags = (cb) ->
   this.find {}, {tags: 1}, (err, posts)->
     return cb(err) if err
     cb null, posts.reduce (tags, post)->
      tags.concat (tag for tag in post.tags when tag not in tags)
     , []
 
-module.exports = mongoose.model 'Post', schema
+module.exports = mongoose.model 'Post', Post
