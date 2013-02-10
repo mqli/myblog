@@ -11,9 +11,7 @@ app.configure ->
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.logger 'dev'
-  app.use express.bodyParser
-    keepExtensions: true
-    uploadDir: './public/gallery'
+  app.use express.bodyParser()
   app.use express.methodOverride()
   app.use express.cookieParser 'bla bla'
   app.use express.session()

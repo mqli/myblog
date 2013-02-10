@@ -1,8 +1,0 @@
-extends ../includes/admin
-block content
-  div.row
-    div.span9
-      form(action='/admin/image', method='post', enctype="multipart/form-data")
-        label image
-        input.span10(name='image',type='file')
-        button.btn.btn-primary(type='submit') save
