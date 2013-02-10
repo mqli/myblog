@@ -1,0 +1,10 @@
+extends ../includes/admin
+block content
+  ul.thumbnails
+    for image in images
+      li.span8
+        a.thumbnail(href='#')
+          img(src='/gallery/#{image}', alt='')
+        div.caption
+          p: a.btn.btn-primary.pull-right(href='/admin/image/delete/#{image}') delete
+          
