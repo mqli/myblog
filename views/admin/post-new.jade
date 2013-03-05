@@ -4,8 +4,11 @@ block content
     form(action='/admin/post/new', method='post')
       label title
       input.span10(name='post[title]',type='text')
-      label tags
-      input(name='post[tags]',type='text')
+      label category
+      select(name='post[category]')
+        option(value='')
+        for category in categories
+          option(value='#{category.name}')=category.name
       label content
       textarea.span10(name='post[content]',rows=20)
       button.btn.btn-primary(type='submit') save

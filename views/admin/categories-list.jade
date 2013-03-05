@@ -1,0 +1,20 @@
+extends ../includes/admin
+block content
+  if categories.length == 0
+      p no result
+  else 
+    table.table.table-striped
+      thead: tr
+        th name
+        th delete
+      tbody
+        for category in categories
+          tr
+            td=category.name
+            td
+              i.icon-trash()a(href='/admin/categories/remove/#{category._id}') delete
+  div.span9
+    form(action='/admin/categories', method='post')
+      label new category
+      input.span10(name='category[name]',type='text')
+      button.btn.btn-primary(type='submit') save
