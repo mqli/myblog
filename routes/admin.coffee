@@ -1,4 +1,5 @@
 Post = require('../model/post')
+Category = require('../model/category')
 module.exports = (app) ->
   
   app.get '/admin', (req, res) ->
@@ -13,15 +14,42 @@ module.exports = (app) ->
       res.render 'admin/post-edit', post: post
 
   app.post '/admin/post/edit/:id', (req, res) ->
-    Post.findById req.params.id, (err, post) ->
+    Post.findById req.param('id') , (err, post) ->
+      return res.send(404) if not post 
+      post.updateTime = Date.now();
       post.update req.body.post, (err, post) ->
         res.redirect '/admin/posts'
 
+  app.get '/admin/post/remove/:id', (req, res) ->
+    Post.findById req.params.id, (err, post) ->
+      post.remove (err, post) ->
+        res.redirect '/admin/posts'
+
   app.get '/admin/post/new', (req, res) ->
-    res.render 'admin/post-new'
+    Category.find (err, categories) ->
+      res.render 'admin/post-new', categories: categories
 
   app.post '/admin/post/new', (req, res) ->
     post = new Post(req.body.post)
-    post.tags = req.body.post.tags.split ','
+    #post.tags = if req.body.post.tags then req.body.post.tags.split ',' else []
     post.save (err, post) ->
       res.redirect '/admin/posts'
+
+  render_categories = (res)->
+    Category.find (err, categories) ->
+      res.render 'admin/categories-list', categories: categories
+
+  app.get '/admin/categories', (req, res) ->
+    render_categories res
+
+  app.post '/admin/categories', (req, res) ->
+    Category.create req.body.category, (err, category) -> 
+      render_categories res
+      
+  app.get '/admin/categories/remove/:id', (req, res) ->
+    Category.findById req.param('id'), (err, category) ->
+      return res.send(404) if not category
+      Post.count category: category.name, (err, count)->
+        if count == 0 then return category.remove (err, category) ->
+          render_categories res
+        render_categories res

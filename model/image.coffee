@@ -2,10 +2,7 @@ mongoose = require 'mongoose'
 
 Image = new mongoose.Schema
   name: String
-  url: String
-  isTrash: 
-    type: Boolean
-    default: false
+  path: String
   createTime: 
     type: Date
     default: Date.now

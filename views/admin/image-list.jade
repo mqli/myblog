@@ -3,8 +3,14 @@ block content
   ul.thumbnails
     for image in images
       li.span8
-        a.thumbnail(href='#')
-          img(src='/gallery/#{image}', alt='')
+        a.thumbnail(href='#{image.path}')
+          img(src='#{image.path}', alt='')
         div.caption
-          p: a.btn.btn-primary.pull-right(href='/admin/image/delete/#{image}') delete
+          p: a.btn.btn-primary.pull-right(href='/admin/image/delete/#{image._id}') delete
+  div.row
+    div.span9
+      form(action='/admin/image', method='post', enctype="multipart/form-data")
+        label image
+        input.span10(name='image',type='file')
+        button.btn.btn-primary(type='submit') save
           

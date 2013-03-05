@@ -3,21 +3,25 @@ block content
   table.table.table-striped
     thead: tr
       th title
-      th tags
-      th time
-      th edit
-      th delete
+      th category
+      th create
+      th last update
+      th(conspan='3')|operations
     tbody
       if posts.length == 0
         p no result
       for post in posts
         tr
           td=post.title
-          td=post.tags
+          td=post.category
           td
             =post.createTime.getFullYear()+'-'
             =post.createTime.getMonth()+1+'-'
             =post.createTime.getDate()
+          td
+            =post.updateTime.getFullYear()+'-'
+            =post.updateTime.getMonth()+1+'-'
+            =post.updateTime.getDate()
           td
             i.icon-edit()a(href='/admin/post/edit/#{post._id}') edit
           td

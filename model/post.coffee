@@ -2,6 +2,7 @@ mongoose = require 'mongoose'
 
 Post = new mongoose.Schema
   title: String
+  category: String
   tags: [String]
   isDraft: 
     type: Boolean
@@ -10,6 +11,9 @@ Post = new mongoose.Schema
     type: Boolean
     default: false
   createTime: 
+    type: Date
+    default: Date.now
+  updateTime:
     type: Date
     default: Date.now
   content: String
