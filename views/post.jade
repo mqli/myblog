@@ -1,13 +1,23 @@
 extends includes/layout
+include includes/share
+block styles
+  style
+    .blog-content{
+      min-height: 300px;
+    }
+block scripts
+  script(src="http://w.sharethis.com/button/buttons.js")
+  script
+    stLight.options({publisher: "ur-262ad34a-1539-2c89-79c1-993d32017c22", doNotHash: false, doNotCopy: false, hashAddressBar: true})
 block content
   h2: a(href="/post/#{post._id}") #{post.title}
   p
-    span.tags
-      for tag in post.tags
-        a(href="/tag/#{tag}"): span.label.label-info #{tag}
-      i.icon-calendar
-      =post.createTime.getFullYear()+'-'
-      =post.createTime.getMonth()+1+'-'
-      =post.createTime.getDate()
-  div 
+    i.icon-calendar
+    =post.createTime.getFullYear()+'-'
+    =post.createTime.getMonth()+1+'-'
+    =post.createTime.getDate()
+    mixin share_facebook
+    mixin share_twitter
+  div.blog-content
     |!{post.content}
+  p

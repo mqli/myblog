@@ -1,6 +1,6 @@
 extends ../includes/admin
 block content
-  if categories.length == 0
+  if _.categories.length == 0
       p no result
   else 
     table.table.table-striped
@@ -8,7 +8,7 @@ block content
         th name
         th delete
       tbody
-        for category in categories
+        for category in _.categories
           tr
             td=category.name
             td

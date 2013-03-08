@@ -23,8 +23,14 @@ app.configure ->
       req.ip is '127.0.0.1'
         return next()
     res.redirect '/'
+  app.use (req, res, next) ->
+    render = res.render
+    res.render = (template, params={})->
+      params._ = app.get '_'
+      console.log app.get '_'
+      render.call res, template, params
+    return next()
   app.use app.router
-  
 
 app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true
@@ -34,8 +40,12 @@ app.configure 'production', ->
 
 fs.readdirSync(__dirname + '/routes').forEach (name)->
   if name.indexOf('.coffee') is name.length - 7
-    require(__dirname + '/routes/' + name)(app) 
-
-app.listen config.SERVER_PORT 
+    require(__dirname + '/routes/' + name)(app)
+app.set '_', {}
+mongoose.model('Category').find (err, categories)->
+  app.get('_').categories = categories
+  mongoose.model('Album').find (err, albums)->
+    app.get('_').albums = albums
+    app.listen config.SERVER_PORT 
 
 console.log "Express server listening for connections"

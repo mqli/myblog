@@ -1,0 +1,22 @@
+extends ../includes/admin
+block content
+  div.row
+    ul.thumbnails
+      for image in images
+        li.span2
+          a.thumbnail()
+            img(src='/gallery/#{image.path}', alt='')
+          div.caption
+            p=image.name
+            a.btn.btn-primary.pull-right(href='/admin/album/#{album._id}/image/add/#{image._id}') add to album
+  div.row
+    form(action='/admin/album/#{album._id}',method='post')
+      ul.thumbnails
+        for image in album.images
+          li.span2
+            a.thumbnail()
+              img(src='/gallery/#{image.path}', alt='')
+            div.caption
+              p=image.name
+              a.btn.btn-danger.pull-right(href='/admin/album/#{album._id}/image/remove/#{image._id}') remove 
+    

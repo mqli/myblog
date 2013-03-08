@@ -1,0 +1,24 @@
+extends ../includes/admin
+block content
+  if _.albums.length == 0
+      p no result
+  else 
+    table.table.table-striped
+      thead: tr
+        th name
+        th image
+        th edit
+        th delete
+      tbody
+        for album in _.albums
+          tr
+            td=album.name
+            td=album.images.length
+            td
+              i.icon-edit()a(href='/admin/album/edit/#{album._id}') edit
+            td
+              i.icon-trash()a(href='/admin/album/remove/#{album._id}') delete
+  div.span9
+    form(action='/admin/album', method='post')
+      input.span10(name='album[name]',type='text')
+      button.btn.btn-primary(type='submit') new album
