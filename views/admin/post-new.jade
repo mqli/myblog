@@ -12,6 +12,8 @@ block content
     form(action='/admin/post/new', method='post')
       label title
       input.span10(name='post[title]',type='text',required)
+      label tags
+      input.span10(name='post[tags]',type='text')
       label category
       select(name='post[category]',required)
         option(value='')

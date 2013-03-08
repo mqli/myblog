@@ -15,9 +15,11 @@ module.exports = (app) ->
 
   app.post '/admin/post/edit/:id', (req, res) ->
     Post.findById req.param('id') , (err, post) ->
-      return res.send(404) if not post 
+      return res.send(404) if not post
+      tags = req.body.post.tags.trim() or ''
+      post.tags = tags.split /\s+/ or []
       post.updateTime = Date.now();
-      post.update req.body.post, (err, post) ->
+      post.save (err, post) ->
         res.redirect '/admin/posts'
 
   app.get '/admin/post/remove/:id', (req, res) ->
@@ -31,7 +33,8 @@ module.exports = (app) ->
 
   app.post '/admin/post/new', (req, res) ->
     post = new Post(req.body.post)
-    #post.tags = if req.body.post.tags then req.body.post.tags.split ',' else []
+    tags = req.body.post.tags.trim() or ''
+    post.tags = tags.split /\s+/ or []
     post.save (err, post) ->
       res.redirect '/admin/posts'
 
