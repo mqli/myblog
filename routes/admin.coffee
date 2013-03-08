@@ -35,21 +35,21 @@ module.exports = (app) ->
     post.save (err, post) ->
       res.redirect '/admin/posts'
 
-  render_categories = (res)->
+  app.get '/admin/categories', (req, res) ->
     Category.find (err, categories) ->
       res.render 'admin/categories-list', categories: categories
 
-  app.get '/admin/categories', (req, res) ->
-    render_categories res
-
   app.post '/admin/categories', (req, res) ->
-    Category.create req.body.category, (err, category) -> 
-      render_categories res
+    Category.create req.body.category, (err, category) ->
+      req.app.get('_').categories.push category
+      res.render 'admin/categories-list'
       
   app.get '/admin/categories/remove/:id', (req, res) ->
     Category.findById req.param('id'), (err, category) ->
       return res.send(404) if not category
       Post.count category: category.name, (err, count)->
         if count == 0 then return category.remove (err, category) ->
-          render_categories res
-        render_categories res
+          req.app.get('_').categories = req.app.get('_').categories.filter (category)->
+            return category._id.toString() != req.param('id')
+          res.render 'admin/categories-list'
+        res.render 'admin/categories-list'

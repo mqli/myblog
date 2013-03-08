@@ -1,11 +1,27 @@
 extends ../includes/admin
+block scripts 
+  script(type="text/javascript",src="/javascript/lib/jquery.cleditor.min.js")
+  script
+    $(document).ready(function() {
+      $("textarea").cleditor({width:'100%', height:250});
+    });
+block styles
+  link(rel="stylesheet",href="/javascript/lib/jquery.cleditor.css")
 block content
   div.row
-    div.span9
+    div.span10
       form(action='/admin/post/edit/#{post._id}', method='post')
         label title
-        input.span10(name='post[title]',type='text',value='#{post.title}')
+        input.span10(name='post[title]',type='text',value='#{post.title}',required)
+        label category
+        select(name='post[category]')
+          option(value='')
+          for category in _.categories
+            if post.category == category.name
+              option(value='#{category.name}',selected)=category.name
+            else
+              option(value='#{category.name}')=category.name
         label content
-        textarea.span10(name='post[content]',rows=20)
-          =post.content
+        textarea(name='post[content]',rows=20)
+          |!{post.content}
         button.btn.btn-primary(type='submit') save
