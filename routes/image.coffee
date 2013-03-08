@@ -18,6 +18,7 @@ module.exports = (app) ->
   app.get '/admin/image/delete/:id', (req, res) ->
     Image.findById req.param('id'), (err, image) ->
       return res.send 404 if not image
-      fs.unlinkSync './public/gallery/' + image.path
+      if fs.existsSync './public/gallery/' + image.path 
+         fs.unlinkSync './public/gallery/' + image.path
       image.remove ->
         res.redirect '/admin/image'
