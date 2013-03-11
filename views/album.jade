@@ -1,13 +1,12 @@
 extends includes/layout
 include includes/share
 block content
-  h2 albums
-    for album in albums
-      if album.images.length > 0
-        ul.thumbnails
-          -var image = album.images[0]
-            li.span4
-              a.thumbnail(href='/album/#{album._id}')
-                img(src='/gallery/#{image.path}', alt='')
-              div.caption
-                p=album.name
+  for album in albums
+    if album.images.length > 0
+      ul.thumbnails
+        -var image = album.images[0]
+          li.span4
+            a.thumbnail(href='/album/#{album._id}')
+              img(src='/gallery/#{image.path}', alt='')
+            div.caption
+              p=album.name

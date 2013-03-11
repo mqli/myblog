@@ -8,3 +8,7 @@ module.exports = (app) ->
   app.get '/tag/:tag', (req, res) ->
     Post.find tags: req.params.tag, (err, posts) ->
       res.render 'index', posts: posts
+
+  app.get '/post', (req, res) ->
+    Post.find (err, posts) ->
+      res.render 'post-list', posts: posts

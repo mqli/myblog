@@ -10,6 +10,14 @@ block scripts
   script
     stLight.options({publisher: "ur-262ad34a-1539-2c89-79c1-993d32017c22", doNotHash: false, doNotCopy: false, hashAddressBar: true})
 block content
+  ul.breadcrumb
+    li
+      a(href='/') home
+      span.divider /
+    li
+      a(href='/post') blogs
+      span.divider /
+    li #{post.title}
   h2: a(href="/post/#{post._id}") #{post.title}
   p
     i.icon-calendar
