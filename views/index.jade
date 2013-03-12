@@ -1,4 +1,7 @@
 extends includes/layout
+block head
+  title
+    |mqli blog
 block content
   for post in posts
     h2: a(href="/post/#{post._id}") #{post.title}

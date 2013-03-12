@@ -1,6 +1,6 @@
 extends ../includes/admin
 block content
-  if _.albums.length == 0
+  if albums.length == 0
       p no result
   else 
     table.table.table-striped
@@ -10,7 +10,7 @@ block content
         th edit
         th delete
       tbody
-        for album in _.albums
+        for album in albums
           tr
             td=album.name
             td=album.images.length

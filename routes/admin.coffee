@@ -44,7 +44,7 @@ module.exports = (app) ->
 
   app.post '/admin/categories', (req, res) ->
     Category.create req.body.category, (err, category) ->
-      req.app.get('_').categories.push category
+      req.app.locals.categories.push category
       res.render 'admin/categories-list'
       
   app.get '/admin/categories/remove/:id', (req, res) ->
@@ -52,7 +52,7 @@ module.exports = (app) ->
       return res.send(404) if not category
       Post.count category: category.name, (err, count)->
         if count == 0 then return category.remove (err, category) ->
-          req.app.get('_').categories = req.app.get('_').categories.filter (category)->
+          req.app.locals.categories = req.app.locals.categories.filter (category)->
             return category._id.toString() != req.param('id')
           res.render 'admin/categories-list'
         res.render 'admin/categories-list'

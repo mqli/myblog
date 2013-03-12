@@ -4,12 +4,12 @@ Image = require '../model/image'
 module.exports = (app) ->
   app.get '/admin/album', (req, res) ->
     Album.find (err, albums)->
-      req.app.get('_').albums = albums
+      req.app.locals.albums = albums
       res.render 'admin/album-list'
 
   app.post '/admin/album', (req, res) ->
     new Album(req.param 'album').save (err, album) ->
-      req.app.get('_').albums.push album
+      req.app.locals.albums.push album
       res.redirect 'admin/album'
 
   app.get '/admin/album/:id/image/add/:image', (req, res) ->

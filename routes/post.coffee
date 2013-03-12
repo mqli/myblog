@@ -12,3 +12,7 @@ module.exports = (app) ->
   app.get '/post', (req, res) ->
     Post.find (err, posts) ->
       res.render 'post-list', posts: posts
+
+  app.get '/category/:category', (req, res) ->
+    Post.find category: req.param('category'), (err, posts) ->
+      res.render 'post-list', posts: posts

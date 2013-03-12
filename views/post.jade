@@ -1,14 +1,15 @@
 extends includes/layout
 include includes/share
-block styles
+block head
   style
     .blog-content{
       min-height: 300px;
     }
-block scripts
   script(src="http://w.sharethis.com/button/buttons.js")
   script
-    stLight.options({publisher: "ur-262ad34a-1539-2c89-79c1-993d32017c22", doNotHash: false, doNotCopy: false, hashAddressBar: true})
+    stLight.options({publisher: "ur-262ad34a-1539-2c89-79c1-993d32017c22", doNotHash: true, doNotCopy: false, hashAddressBar: true})
+  title
+    =post.title
 block content
   ul.breadcrumb
     li
@@ -24,8 +25,9 @@ block content
     =post.createTime.getFullYear()+'-'
     =post.createTime.getMonth()+1+'-'
     =post.createTime.getDate()
-    mixin share_facebook
-    mixin share_twitter
+    //mixin share_facebook
+    //mixin share_twitter
+    mixin share_sina
   div.blog-content
     |!{post.content}
   p
